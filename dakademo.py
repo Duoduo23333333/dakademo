@@ -15,8 +15,12 @@ end_time = time(23, 59)
 time_step = 1
 time_interval = int(timedelta(hours=1).total_seconds() / 60 / time_step)
 
-# 选择日期
-st.write("### 截图时间 & 运动时间")
+# 在发起请求前调用 st.image() 方法，显示占位符图片
+placeholder_image = Image.open("./HH.png")
+image_placeholder = st.image(placeholder_image, output_format="JPEG", use_column_width=True)
+
+
+
 
 # 将小时和分钟设置为两个独立的下拉框
 col1, col2 ,_,col3,col4,col5= st.columns([16, 16, 6, 30, 16, 16])
@@ -87,9 +91,3 @@ else:
         image2 = Image.open(BytesIO(base64.b64decode(ba)))
         image_placeholder.empty()
         image_placeholder.image(image2, output_format="JPEG", use_column_width=True)
-
-# 在发起请求前调用 st.image() 方法，显示占位符图片
-placeholder_image = Image.open("HH.png")
-image_placeholder = st.image(placeholder_image, output_format="JPEG", use_column_width=True)
-
-
