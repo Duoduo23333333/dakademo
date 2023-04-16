@@ -16,7 +16,7 @@ time_step = 1
 time_interval = int(timedelta(hours=1).total_seconds() / 60 / time_step)
 
 # 在发起请求前调用 st.image() 方法，显示占位符图片
-placeholder_image = Image.open("./HH.png")
+placeholder_image = Image.open("./sample.jpg")
 image_placeholder = st.image(placeholder_image, output_format="JPEG", use_column_width=True)
 
 
@@ -25,11 +25,11 @@ image_placeholder = st.image(placeholder_image, output_format="JPEG", use_column
 # 将小时和分钟设置为两个独立的下拉框
 col1, col2 ,_,col3,col4,col5= st.columns([16, 16, 6, 30, 16, 16])
 with col1:
-    hour1 = st.selectbox("截图时间", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour1")
+    hour1 = st.selectbox("① 截图时间", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour1")
 with col2:
     minute1 = st.selectbox("", range(0, 60, time_step), format_func=lambda x: f"{x} 分", key="min1")
 with col3:
-    date = st.date_input("### 运动日期 & 时间",key="ss1")
+    date = st.date_input("② 运动日期",key="ss1")
 with col4:
     hour = st.selectbox("", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour")
 with col5:
@@ -40,14 +40,14 @@ with col5:
 
 c1, c2 ,_,c3,_,c4= st.columns([16, 16,  6, 20,6, 36])
 with c1:
-    v1 = st.selectbox("平均配速", range(0, 60, 1), format_func=lambda x: f"{x} 分")
+    v1 = st.selectbox("③ 平均配速", range(0, 60, 1), format_func=lambda x: f"{x} 分")
 with c2:
     v2 = st.selectbox("", range(0, 60, 1), format_func=lambda x: f"{x} 秒")
 with c3:
     float_values = [1, 1.01, 1.02, 2, 2.01, 2.02,3, 3.01, 3.02, 4, 4.01, 4.02, 5, 5.01, 5.02, 6, 6.01, 6.02, 7, 7.01, 7.02, 8, 8.01, 8.02,9, 9.01, 9.02, 9.98, 9.99]
-    kms = st.selectbox("公里数",  options=float_values, format_func=lambda x: f"{x} Km")
+    kms = st.selectbox("④ 公里数",  options=float_values, format_func=lambda x: f"{x} Km")
 with c4:
-    name = st.text_input("名字")
+    name = st.text_input("⑤ 名字")
 
 
 hour1_str = f"{hour1:02d}"
@@ -65,7 +65,7 @@ text6= f"{v2:02d}"
 
 
 
-uploaded_file = st.file_uploader("头像", type=['jpg', 'jpeg', 'png'])
+uploaded_file = st.file_uploader("⑥ 头像", type=['jpg', 'jpeg', 'png'])
 if uploaded_file is not None:
     # 获取Base64编码
     text0 = base64.b64encode(uploaded_file.read()).decode()
