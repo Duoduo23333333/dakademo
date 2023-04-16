@@ -8,11 +8,13 @@ from io import BytesIO
 
 st.write('''<style>
 
+
 [data-testid="column"] {
-    width: calc(17% - 1rem) !important;
-    flex: 1 1 calc(17% - 1rem) !important;
-    min-width: calc(17% - 1rem) !important;
+    width: calc(33% - 1rem) !important;
+    flex: 1 1 calc(33% - 1rem) !important;
+    min-width: calc(33% - 1rem) !important;
 }
+
 </style>''', unsafe_allow_html=True)
 
 # 设置开始和结束时间
@@ -31,31 +33,32 @@ image_placeholder = st.image(placeholder_image, output_format="JPEG", use_column
 
 
 # 将小时和分钟设置为两个独立的下拉框
-col1, col2 ,_,col3,col4,col5= st.columns([16, 16, 6, 30, 16, 16])
+col1, col2 ,col3= st.columns(3)
 with col1:
-    hour1 = st.selectbox("① 截图时间", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour1")
+    hour1 = st.selectbox("### ① 截图时间", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour1")
 with col2:
     minute1 = st.selectbox("", range(0, 60, time_step), format_func=lambda x: f"{x} 分", key="min1")
 with col3:
-    date = st.date_input("② 运动日期",key="ss1")
+    name = st.text_input("### ② 名字")
+
+col4, col5 ,col6= st.columns(3)
 with col4:
-    hour = st.selectbox("", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour")
+    date = st.date_input("### ③ 运动日期",key="ss1")
 with col5:
+    hour = st.selectbox("", range(start_time.hour, end_time.hour+1), format_func=lambda x: f"{x} 时", key="hour")
+with col6:
     minute = st.selectbox("", range(0, 60, time_step), format_func=lambda x: f"{x} 分", key="min")
 
-
-
-
-c1, c2 ,_,c3,_,c4= st.columns([16, 16,  6, 20,6, 36])
-with c1:
-    v1 = st.selectbox("③ 平均配速", range(0, 60, 1), format_func=lambda x: f"{x} 分")
-with c2:
-    v2 = st.selectbox("", range(0, 60, 1), format_func=lambda x: f"{x} 秒")
-with c3:
+col7, col8 ,col9= st.columns(3)
+with col7:
     float_values = [1, 1.01, 1.02, 2, 2.01, 2.02,3, 3.01, 3.02, 4, 4.01, 4.02, 5, 5.01, 5.02, 6, 6.01, 6.02, 7, 7.01, 7.02, 8, 8.01, 8.02,9, 9.01, 9.02, 9.98, 9.99]
-    kms = st.selectbox("④ 公里数",  options=float_values, format_func=lambda x: f"{x} Km")
-with c4:
-    name = st.text_input("⑤ 名字")
+    kms = st.selectbox("### ④ 公里数",  options=float_values, format_func=lambda x: f"{x} Km")
+with col8:
+    v1 = st.selectbox("### ⑤ 平均配速", range(0, 60, 1), format_func=lambda x: f"{x} 分")
+with col9:
+    v2 = st.selectbox("", range(0, 60, 1), format_func=lambda x: f"{x} 秒")
+
+
 
 
 hour1_str = f"{hour1:02d}"
@@ -73,7 +76,7 @@ text6= f"{v2:02d}"
 
 
 
-uploaded_file = st.file_uploader("⑥ 头像", type=['jpg', 'jpeg', 'png'])
+uploaded_file = st.file_uploader("### ⑥ 头像", type=['jpg', 'jpeg', 'png'])
 if uploaded_file is not None:
     # 获取Base64编码
     text0 = base64.b64encode(uploaded_file.read()).decode()
