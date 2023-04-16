@@ -6,6 +6,14 @@ import base64
 from io import BytesIO
 
 
+st.write('''<style>
+
+[data-testid="column"] {
+    width: calc(17% - 1rem) !important;
+    flex: 1 1 calc(17% - 1rem) !important;
+    min-width: calc(17% - 1rem) !important;
+}
+</style>''', unsafe_allow_html=True)
 
 # 设置开始和结束时间
 start_time = time(0, 0)
